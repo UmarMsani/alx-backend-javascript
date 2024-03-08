@@ -1,15 +1,10 @@
 export default class HolbertonCourse {
   constructor(name, length, students) {
-    // Validate and set the name attribute
     this._name = this.validateString(name, 'name');
-
-    // Validate and set the length attribute
     this._length = this.validateNumber(length, 'length');
-
-    // Validate and set the students attribute
     this._students = this.validateStudents(students);
 
-    // Define getters and setters
+
     Object.defineProperties(this, {
       name: {
         get: () => this._name,
