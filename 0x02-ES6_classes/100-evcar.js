@@ -1,10 +1,10 @@
 /* eslint-disable no-underscore-dangle */
-import Car from './10-car';
+import Car from './10-car.js';
 
 export default class EVCar extends Car {
   constructor(brand, motor, color, range) {
     super(brand, motor, color);
-    this.range = range;
+    this._range = range;
   }
 
   get range() {
@@ -16,11 +16,11 @@ export default class EVCar extends Car {
   }
 
   /**
-   * Clone the car.
-   * @returns {EVCar} - A new instance of EVCar.
+   * Clone the car, returning an instance of Car.
+   * @returns {Car} - A new instance of Car.
    */
   cloneCar() {
-    const Species = super.constructor[Symbol.species];
+    const Species = this.constructor[Symbol.species] || Car;
     return new Species();
   }
 }
