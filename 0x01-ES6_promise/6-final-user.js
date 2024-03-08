@@ -9,16 +9,13 @@ import uploadPhoto from './5-photo-reject';
  * @returns {Promise} - A Promise that resolves with an array of objects
  * representing the status and value/error of each Promise.
  */
-export default function handleProfileSignup(firstName, lastName, fileName) {
-  const promises = [
-    signUpUser(firstName, lastName),
-    uploadPhoto(fileName)
-  ];
-
-  return Promise.allSettled(promises).then((results) => {
-    return results.map((result) => ({
-      status: result.status,
-      value: result.status === 'fulfilled' ? result.value : result.reason
-    }));
-  });
+export default async function handleProfileSignup(firstName, lastName, fileName) {
+  return Promise
+    .allSettled([signUpUser(firstName, lastName), uploadPhoto(fileName)])
+    .then((res) => (
+      res.map((o) => ({
+        status: o.status,
+        value: o.status === 'fulfilled' ? o.value : String(o.reason),
+      }))
+    ));
 }
