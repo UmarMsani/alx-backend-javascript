@@ -1,44 +1,85 @@
+/**
+ * Class representing a Holberton Course.
+ * @class
+ */
 export default class HolbertonCourse {
+  /**
+   * Create a new HolbertonCourse instance.
+   *
+   * @param {String} name - The name of the course.
+   * @param {Number} length - Duration of the course in months.
+   * @param {String[]} students - An array of student names in the course.
+   */
   constructor(name, length, students) {
-    this._name = this.validateString(name, 'name');
-    this._length = this.validateNumber(length, 'length');
-    this._students = this.validateStudents(students);
-
-
-    Object.defineProperties(this, {
-      name: {
-        get: () => this._name,
-        set: (value) => (this._name = this.validateString(value, 'name')),
-      },
-      length: {
-        get: () => this._length,
-        set: (value) => (this._length = this.validateNumber(value, 'length')),
-      },
-      students: {
-        get: () => this._students,
-        set: (value) => (this._students = this.validateStudents(value)),
-      },
-    });
+    // Initialize attributes with provided values
+    this.name = name;
+    this.length = length;
+    this.students = students;
   }
 
-  validateString(value, attribute) {
+  /**
+   * Get the name of the course.
+   * @returns {String} - The name of the course.
+   */
+  get name() {
+    return this._name;
+  }
+
+  /**
+   * Set the name of the course.
+   *
+   * @param {String} value - The new name for the course.
+   * @throws {TypeError} Will throw an error if the value is not a string.
+   */
+  set name(value) {
     if (typeof value !== 'string') {
-      throw new Error(`${attribute} must be a string`);
+      throw new TypeError('Name must be a string');
     }
-    return value;
+    this._name = value;
   }
 
-  validateNumber(value, attribute) {
+  /**
+   * Get the duration of the course in months.
+   * @returns {Number} - The duration of the course in months.
+   */
+  get length() {
+    return this._length;
+  }
+
+  /**
+   * Set the duration of the course in months.
+   *
+   * @param {Number} value - The new duration for the course.
+   * @throws {TypeError} Will throw an error if the value is not a number.
+   */
+  set length(value) {
     if (typeof value !== 'number') {
-      throw new Error(`${attribute} must be a number`);
+      throw new TypeError('Length must be a number');
     }
-    return value;
+    this._length = value;
   }
 
-  validateStudents(value) {
-    if (!Array.isArray(value) || !value.every((student) => typeof student === 'string')) {
-      throw new Error('students must be an array of strings');
+  /**
+   * Get the array of student names in the course.
+   * @returns {String[]} - An array of student names in the course.
+   */
+  get students() {
+    return this._students;
+  }
+
+  /**
+   * Set the array of student names in the course.
+   *
+   * @param {String[]} value - The new array of student names.
+   * @throws {TypeError} Will throw an error if the value is not an array of strings.
+   */
+  set students(value) {
+    if (!(value instanceof Array)) {
+      throw new TypeError('Students must be an array of strings');
     }
-    return value;
+    if (!value.every((student) => typeof student === 'string')) {
+      throw new TypeError('Students must be an array of strings');
+    }
+    this._students = value;
   }
 }
