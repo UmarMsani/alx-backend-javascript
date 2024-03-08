@@ -11,7 +11,7 @@ export default function createIteratorObject(report) {
           ? { value: flattenedEmployees[currentIndex], done: false }
           : { done: true };
 
-      currentIndex += 1;
+      currentIndex = currentIndex + 1;
 
       return result;
     },
