@@ -1,10 +1,8 @@
-/* eslint-disable no-underscore-dangle */
-
 /**
- * Class representing a Currency.
+ * Currency class representing a form of currency.
  * @class
  */
-export default class Currency {
+class Currency {
   /**
    * Create a new Currency instance.
    *
@@ -13,8 +11,21 @@ export default class Currency {
    */
   constructor(code, name) {
     // Initialize attributes with provided values
-    this._code = this.validateString(code, 'code');
-    this._name = this.validateString(name, 'name');
+    this.code = code;
+    this.name = name;
+  }
+
+  /**
+   * Set the currency code.
+   *
+   * @param {String} code - The new currency code.
+   * @throws {TypeError} Will throw an error if the code is not a string.
+   */
+  set code(code) {
+    if (typeof code !== 'string') {
+      throw new TypeError('Code must be a string');
+    }
+    this._code = code;
   }
 
   /**
@@ -26,13 +37,16 @@ export default class Currency {
   }
 
   /**
-   * Set the currency code.
+   * Set the currency name.
    *
-   * @param {String} value - The new currency code.
-   * @throws {TypeError} Will throw an error if the value is not a string.
+   * @param {String} name - The new currency name.
+   * @throws {TypeError} Will throw an error if the name is not a string.
    */
-  set code(value) {
-    this._code = this.validateString(value, 'code');
+  set name(name) {
+    if (typeof name !== 'string') {
+      throw new TypeError('Name must be a string');
+    }
+    this._name = name;
   }
 
   /**
@@ -44,35 +58,12 @@ export default class Currency {
   }
 
   /**
-   * Set the currency name.
-   *
-   * @param {String} value - The new currency name.
-   * @throws {TypeError} Will throw an error if the value is not a string.
-   */
-  set name(value) {
-    this._name = this.validateString(value, 'name');
-  }
-
-  /**
    * Display the full currency information.
    * @returns {String} - Formatted string containing name and code.
    */
   displayFullCurrency() {
     return `${this._name} (${this._code})`;
   }
-
-  /**
-   * Validate that the value is a string.
-   *
-   * @param {any} value - The value to validate.
-   * @param {String} attribute - The name of the attribute.
-   * @returns {String} - The validated string.
-   * @throws {TypeError} Will throw an error if the value is not a string.
-   */
-  validateString(value, attribute) {
-    if (typeof value !== 'string') {
-      throw new TypeError(`${attribute} must be a string`);
-    }
-    return value;
-  }
 }
+
+export default Currency;
