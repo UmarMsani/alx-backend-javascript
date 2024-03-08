@@ -1,24 +1,42 @@
-/* eslint-disable no-underscore-dangle */
+/* eslint-disable no-underscore-dangle. */
 export default class Car {
-  /**
-   * Create a new Car instance.
-   *
-   * @param {String} brand - The brand of the car.
-   * @param {String} motor - The motor type of the car.
-   * @param {String} color - The color of the car.
-   */
   constructor(brand, motor, color) {
-    this._brand = brand;
-    this._motor = motor;
-    this._color = color;
+    this.brand = brand;
+    this.motor = motor;
+    this.color = color;
   }
 
-  /**
-   * Clone the car, returning a new instance of the class.
-   * @returns {Car} - A new instance of Car.
-   */
+  get brand() {
+    return this._brand;
+  }
+
+  set brand(value) {
+    this._brand = value;
+  }
+
+  get motor() {
+    return this._motor;
+  }
+
+  set motor(value) {
+    this._motor = value;
+  }
+
+  get color() {
+    return this._color;
+  }
+
+  set color(value) {
+    this._color = value;
+  }
+
+  static get [Symbol.species]() {
+    return this;
+  }
+
   cloneCar() {
-    const Species = this.constructor[Symbol.species] || Car;
+    const Species = this.constructor[Symbol.species];
+
     return new Species();
   }
 }
