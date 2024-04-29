@@ -1,18 +1,16 @@
 /**
  * Reads user input from stdin and displays a welcome message.
  */
+process.stdout.write('Welcome to Holberton School, what is your name?\n');
 
-const { stdout, stdin } = process;
+process.stdin.on('readable', () => {
+  const chunk = process.stdin.read();
 
-stdout.write('Welcome to Holberton School, what is your name?\n');
-
-stdin.setEncoding('utf-8');
-stdin.on('readable', () => {
-  const name = stdin.read();
-  stdout.write(`Your name is: ${name}`);
-  process.exit();
+  if (chunk) {
+    process.stdout.write(`Your name is: ${chunk}`);
+  }
 });
 
-process.on('exit', () => {
-  stdout.write('This important software is now closing\n');
+process.stdin.on('end', () => {
+  process.stdout.write('This important software is now closing\n');
 });
